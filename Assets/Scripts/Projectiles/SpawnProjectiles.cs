@@ -52,15 +52,35 @@ public class SpawnProjectiles : MonoBehaviour
 
         if (firePoint != null)
         {
+            var projectilePSSettings = projectile.GetComponentInChildren<ParticleSystem>().main;
             projectile.transform.position = firePoint.transform.position;
             projectile.transform.localRotation = Quaternion.LookRotation(target - firePoint.transform.position);
-            if (timer < 5)
+            if(timer < 5)
             {
-                projectile.GetComponentInChildren<ParticleSystem>().transform.localScale += new Vector3(timer / 100, timer / 100, timer / 100);
-                Debug.Log(projectile.GetComponentInChildren<ParticleSystem>().transform.localScale);
+                projectile.GetComponentInChildren<ParticleSystem>().transform.localScale += new Vector3(timer / 1000, timer / 1000, timer / 1000);
+                if (timer < 1)
+                {
+                    projectilePSSettings.startColor = new ParticleSystem.MinMaxGradient(new Color(255, 0, 0));
+                }
+                if(timer >=1 && timer < 2)
+                {
+                    projectilePSSettings.startColor = new ParticleSystem.MinMaxGradient(new Color(255, 220, 0));
+                }
+                if (timer >= 2 && timer < 3)
+                {
+                    projectilePSSettings.startColor = new ParticleSystem.MinMaxGradient(new Color(0, 255, 255));
+                }
+                if (timer >= 3 && timer < 4)
+                {
+                    projectilePSSettings.startColor = new ParticleSystem.MinMaxGradient(new Color(255, 255, 255));
+                }
+                if (timer >= 4)
+                {
+                    projectilePSSettings.startColor = new ParticleSystem.MinMaxGradient(new Color(120, 0, 120));
+                }
             }
             else
-                projectile.GetComponentInChildren<ParticleSystem>().transform.localScale += new Vector3(1, 1, 1);
+                projectile.GetComponentInChildren<ParticleSystem>().transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
     }
 
