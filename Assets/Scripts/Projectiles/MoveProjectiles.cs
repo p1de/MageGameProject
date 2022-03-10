@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MoveProjectiles : MonoBehaviour
 {
-    public float speed;
-    public float fireRate;
+    [SerializeField]
+    float speed;
 
     void Update()
     {

@@ -4,12 +4,16 @@ using UnityEngine.InputSystem;
 
 public class SpawnProjectiles : MonoBehaviour
 {
-    public GameObject firePoint;
-    public Camera cam;
-    public List<GameObject> vfx = new List<GameObject>();
-    public int secondsToDestroy;
-    private GameObject effectToSpawn;
-    private GameObject projectile;
+    [SerializeField]
+    GameObject firePoint;
+    [SerializeField]
+    Camera cam;
+    [SerializeField]
+    List<GameObject> vfx = new List<GameObject>();
+    [SerializeField]
+    int secondsToDestroy;
+    GameObject effectToSpawn;
+    GameObject projectile;
     bool buttonHold = false, timerOn = false;
     float timer;
 
@@ -21,7 +25,7 @@ public class SpawnProjectiles : MonoBehaviour
 
     void Update()
     {
-        Timer();
+        IncreaseTime();
         if (!Mouse.current.leftButton.CheckStateIsAtDefault())
         {
             buttonHold = true;
@@ -89,7 +93,7 @@ public class SpawnProjectiles : MonoBehaviour
         Destroy(projectile, secondsToDestroy);
     }
 
-    void Timer()
+    void IncreaseTime()
     {
         if (timerOn)
             timer += Time.deltaTime;
